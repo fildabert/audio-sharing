@@ -3,13 +3,27 @@
         <h1>Hello World</h1>
         <button @click="record">Record</button>
         <button id="stoprecord">Stop Recording</button>
+        <audio controls v-if="audioLink">
+        <source :src="audioLink" />
+        </audio>
     </div>
 </template>
 
 <script>
+
+// axios.request({
+//                     method: "POST",
+//                     url: "http://localhost:3000/audio/upload",
+//                     data: {
+//                         blob: formData
+//                     }
+//                 })
+import axios from "axios"
+
 export default {
     data () {
         return {
+            audioLink: ""
         }
     },
     methods: {
@@ -35,7 +49,18 @@ export default {
                 const audioURL = URL.createObjectURL(audioBlob)
                 const audio = new Audio(audioURL);
                 audio.play();
-                console.log(audio, "==========================")
+                
+                const formData = new FormData()
+                formData.append('audio', audioBlob)
+                console.log(formData)
+                axios.post(`http://localhost:3000/audio/upload`, formData)
+                .then(response =>{
+                    this.audioLink = response.data
+                    console.log(response.data)
+                })
+                .catch(err =>{
+                    console.log(err.response)
+                })
                 });
             });
         }
@@ -46,3 +71,5 @@ export default {
 <style>
 
 </style>
+
+

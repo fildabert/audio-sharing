@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "vue": "^2.6.10",
     "vue-audio-recorder": "^3.0.1",
     "vue-hot-reload-api": "^2.3.3"
