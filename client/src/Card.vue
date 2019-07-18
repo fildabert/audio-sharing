@@ -2,9 +2,11 @@
     <div style="padding-top: 20px;">
         <div class="ui card" style="width: 100%">
             <div class="content">
-                <div class="header">{{list.userId.username}}</div>
+                <div class="header">User</div>
                 <div class="description">
-                    <p>{{list.link}}</p>
+                    <audio controls v-if="audioLink" style="width: 500px; background-color: blue;">
+                    <source :src="audioLink.link" />
+                    </audio>
                 </div>
             </div>
             <div class="extra content">
@@ -12,7 +14,7 @@
                    <a href="#"><i class="like icon"></i></a> 
                 </span>
                 <span class="center floated star">
-                    <a href="#" @click.prevent="addfav(list.id)"><i class="star icon"></i></a>
+                    <a href="#"><i class="star icon"></i></a>
                 </span>
                 <span class="right floated">
                     <a href="http://twitter.com/share">Share with Twitter</a>
@@ -25,18 +27,18 @@
 <script>
 export default {
     name: 'Card',
-    props:['list'],
+    props:['list', 'audioLink'],
     methods:{
-        addFav(id){
-            axios({
-                url:`http://localhost/audios/${id}`,
-                method: "PUT",
-                data: {
+        // addFav(id){
+        //     axios({
+        //         url:`http://localhost/audios/${id}`,
+        //         method: "PUT",
+        //         data: {
                     
-                }
-            })
-            .then
-        }
+        //         }
+        //     })
+        //     .then
+        // }
     }
 }
 </script>
