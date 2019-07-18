@@ -55,6 +55,7 @@ export default {
         })
         .then(data => {
           localStorage.setItem('token',data.token) //ntar tes dulu passing datanya 
+          this.$emit('loggedIn', null)
         })
         .catch(err => {
           Swal.fire({
