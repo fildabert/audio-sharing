@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const userModel = require('../models/user')
+=======
+const  userModel  = require('../models/user')
+>>>>>>> 3281874acc842331bacd6736832b63a17f2ef003
 const { compare } = require('../helpers/bcrypt')
 const { sign } = require('../helpers/jwtoken')
 

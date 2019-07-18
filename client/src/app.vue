@@ -1,34 +1,32 @@
-<template lang="html">
-<div>
-  <h1>{{ message }}</h1>
-  <signin @triggerSignUp="triggerSignUp" v-show="showSignIn"></signin>
-  <register v-show="showSignUp"></register>
-</div>
+<template>
+    <div>
+          <Home></Home>
+        <!-- <button @click="record">Record</button>
+        <button id="stoprecord">Stop Recording</button> -->
+        
+    </div>
 </template>
 
 <script>
-import signin from "./signin";
-import register from "./register"
+import axios from "axios"
+import Home from './Home.vue'
+
+
 export default {
-  components : {
-    signin,
-    register
-  },
-  data() {
-    return {
-      message: 'Hello world',
-      showSignUp: false,
-      showSignIn : true,
-    };
-  },
-  methods: {
-    triggerSignUp: function() {
-      this.showSignUp = true
-      this.showSignIn = false
+     components:{
+        'Home' : Home
+    },
+    data () {
+        return {
+            audioLink: ""
+        }
+    },
+    methods: {
+        
     }
-  }
-};
+}
 </script>
 
-<style scoped>
+<style>
+
 </style>
