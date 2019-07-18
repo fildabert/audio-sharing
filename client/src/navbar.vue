@@ -1,5 +1,6 @@
 <template>
 <div>
+<div>
     <div class="ui fixed menu" style = "background-color:darkturquoise">
     <div class="ui fixed container">
       <a href="#" class="header item">
@@ -25,7 +26,11 @@
         </div>
     </div>
   </div>
-  <sidebar v-show = "loggedIn"></sidebar>
+  <sidebar v-show = "loggedIn" ></sidebar>
+  
+</div>
+    <register v-show = "signupForm" style = "margin-top: 50px"></register>
+    <signin v-show = "signinForm" @loggedIn="loggingIn" style = "margin-top: 50px"></signin>
 </div>
 
 </template>
@@ -33,6 +38,8 @@
 <script>
 
 import sidebar from './sidebar'
+import register from './register'
+import signin from './signin'
 
 export default{
     name:"navbar",
@@ -41,22 +48,37 @@ export default{
         loggedIn : false,
         signinForm: false,
         signupForm: false,
+        token: ''
      };
     },
     components:{
-        sidebar
+        sidebar,
+        register,
+        signin,
     },
     methods:{
         signin(){
             this.signinForm = true
+            this.signupForm = false
         },
         signup(){
             this.signupForm = true
+            this.signinForm = false
         },
         signout(){
-
+            localStorage.removeItem('token')
+            this.loggedIn = false
+        },
+        cekLog(){
+            if(this.token){
+                this.loggedIn = true
+            }
+        },
+        loggingIn(data){
+            this.loggedIn = true
+            this.signinForm = false
         }
-    },
+    }
 
 }
 </script>
