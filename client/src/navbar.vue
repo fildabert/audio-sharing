@@ -29,8 +29,8 @@
   <sidebar v-show = "loggedIn" ></sidebar>
   
 </div>
-    <register v-show = "signupForm" style = "margin-top: 50px"></register>
-    <signin v-show = "signinForm" @loggedIn="loggingIn" style = "margin-top: 50px"></signin>
+    <register v-show = "signupForm"></register>
+    <signin v-show = "signinForm" @loggedIn="loggingIn" @triggerSignUp = "signup"></signin>
 </div>
 
 </template>
@@ -62,7 +62,7 @@ export default{
             this.signupForm = false
         },
         signup(){
-            this.signupForm = true
+            this.signupForm = true 
             this.signinForm = false
         },
         signout(){
