@@ -1,5 +1,5 @@
 <template>
-<div style="margin-top :50px; position: fixed" >
+<div style=" position: fixed" >
 
 <div class="ui vertical menu">
   <div class="item">
