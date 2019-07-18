@@ -3,6 +3,8 @@ const Schema = mongoose.Schema
 const { hash } = require('../helpers/bcrypt')
 
 let userSchema = new Schema({
+    firstName : String,
+    lastName : String,
     username: {
         type: String,
         required: [true, `Required input username`],

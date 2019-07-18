@@ -10,6 +10,7 @@
 <script>
 import axios from "axios"
 import Home from './Home.vue'
+
 export default {
      components:{
         'Home' : Home
@@ -26,4 +27,6 @@ export default {
 </script>
 
 <style>
+
 </style>
+

@@ -1,4 +1,4 @@
-const { userModel } = require('../models')
+const  userModel  = require('../models/user')
 const { compare } = require('../helpers/bcrypt')
 const { sign } = require('../helpers/jwtoken')
 
@@ -9,6 +9,7 @@ class UserController {
     userModel
       .create(newUser)
       .then((newUser) => {
+        
         res.status(201).json(newUser)
       })
       .catch(next)
