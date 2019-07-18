@@ -1,12 +1,16 @@
 <template>
-  <h1>{{ message }}</h1>
+  <Home></Home>
 </template>
 
 <script>
+import Home from './Home.vue'
 export default {
+  components:{
+    'Home' : Home
+  },
   data() {
     return {
-      message: 'Hello world',
+      
     };
   },
 };
