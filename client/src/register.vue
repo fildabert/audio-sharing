@@ -59,8 +59,6 @@ export default {
   },
   methods: {
     register: function(){
-      console.log('masuk');
-      console.log(this.username)
       axios
         .post("http://localhost:3000/users/signup", {
           username: this.username,
@@ -70,7 +68,7 @@ export default {
           lastName:this.lastName
         })
         .then(data => {
-          console.log(data);
+
         })
         .catch(err => {
           Swal.fire({
