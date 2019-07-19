@@ -31,10 +31,10 @@ export default{
     },
     methods:{
         getAllAudio(){
-
+            this.$emit('getAllAudio')
         },
         getUserAudio(){
-
+            this.$emit('getUserAudio')
         }
     }
 

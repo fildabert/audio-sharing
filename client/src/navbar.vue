@@ -1,20 +1,20 @@
 <template>
+<div style = "width :100%">
 <div>
-<div>
-    <div class="ui fixed menu" style = "background-color:darkturquoise">
+    <div class="ui fixed menu">
     <div class="ui fixed container">
       <a href="#" class="header item">
-        <img class="logo" src="">
-        Sound
+        <img class="logo" src="https://logo.clearbit.com/voice123.com">
+            Audio
       </a>
       <a href="#" class="item">Home</a>
 
       <div class="ui simple dropdown item">
         Browse Audio<i class="dropdown icon"></i>
         <div class="menu">
-          <a class="item" href="#">Your Audio</a>
+          <a @click= "getUserAudio" class="item" href="#">Your Audio</a>
           <div class="divider"></div>
-          <a class="item" href="#">Browse the Site</a>          
+          <a @click= "getAllAudio" class="item" href="#">Browse the Site</a>          
         </div>
       </div>
     </div>
@@ -26,11 +26,11 @@
         </div>
     </div>
   </div>
-  <sidebar v-show = "loggedIn" ></sidebar>
+  <sidebar style = "margin-top:38px" v-show = "loggedIn" ></sidebar>
   
 </div>
-    <register v-show = "signupForm"></register>
-    <signin v-show = "signinForm" @loggedIn="loggingIn" @triggerSignUp = "signup"></signin>
+    <register v-show = "signupForm" style = "margin-top:38px"></register>
+    <signin v-show = "signinForm" @loggedIn="loggingIn" @triggerSignUp = "signup" style = "margin-top:38px"></signin>
 </div>
 
 </template>
@@ -48,7 +48,6 @@ export default{
         loggedIn : false,
         signinForm: false,
         signupForm: false,
-        token: ''
      };
     },
     components:{
@@ -69,14 +68,15 @@ export default{
             localStorage.removeItem('token')
             this.loggedIn = false
         },
-        cekLog(){
-            if(this.token){
-                this.loggedIn = true
-            }
-        },
         loggingIn(data){
             this.loggedIn = true
             this.signinForm = false
+        },
+        getUserAudio(){
+            this.$emit('getUserAudio')
+        },
+        getAllAudio(){
+            this.$emit('getAllAudio')
         }
     }
 
