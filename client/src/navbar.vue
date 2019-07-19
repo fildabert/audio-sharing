@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <sidebar @search="search" style="margin-top:50px" v-show="loggedIn"></sidebar>
+      <!-- <sidebar @search="search" style="margin-top:50px" v-show="loggedIn"></sidebar> -->
     </div>
     <register v-show="signupForm" @triggerSignIn="signin" style="margin-top:50px"></register>
     <signin

@@ -37,9 +37,10 @@ class AudioController {
     }
 
     static findById(req, res, next) {
-        console.log(req.headers.decoded);
-        Audio.find({userId : req.headers.decoded._id}).sort([['createdAt', 'descending']])
+        // console.log(req.headers.decoded);
+        Audio.find({userId : req.headers.decoded._id}).populate("userId").sort([['createdAt', 'descending']])
         .then(audios => {
+            console.log(audios,"====")
             res.status(200).json(audios)
         })
         .catch(next)
