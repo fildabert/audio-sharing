@@ -1,3 +1,8 @@
 /node_modules
 .cache
 dist
+<<<<<<< HEAD
+package-lock.json
+=======
+
+>>>>>>> a8cee1dea9444e05d2eb370fb627037fe9f6109b
