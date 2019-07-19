@@ -2,7 +2,8 @@
     <div style="padding-top: 20px;">
         <div class="ui card" style="width: 100%">
             <div class="content">
-                <div class="header">User</div>
+                <div class="header">{{audioLink.userId.username}}</div>
+                <div>{{formatDate}}</div>
                 <div class="description">
                     <audio controls v-if="audioLink" style="width: 500px; background-color: blue;">
                     <source :src="audioLink.link" />
@@ -17,7 +18,9 @@
                     <a href="#"><i class="star icon"></i></a>
                 </span>
                 <span class="right floated">
-                    <a href="http://twitter.com/share">Share with Twitter</a>
+                    <a class="twitter-share-button"
+  :href="sharelink">
+Tweet</a>
                 </span>
             </div>
         </div>
@@ -25,9 +28,16 @@
 </template>
 
 <script>
+import moment from "moment"
+
 export default {
     name: 'Card',
     props:['list', 'audioLink'],
+    data() {
+        return {
+            sharelink: `https://twitter.com/intent/tweet?text=My new Audio;url=${this.audioLink.link}`
+        }
+    },
     methods:{
         // addFav(id){
         //     axios({
@@ -39,6 +49,11 @@ export default {
         //     })
         //     .then
         // }
+    },
+    computed: {
+        formatDate: function() {
+            return moment(new Date(this.audioLink.createdAt)).fromNow()
+        }
     }
 }
 </script>
