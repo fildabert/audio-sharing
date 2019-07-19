@@ -18,7 +18,9 @@
                     <a href="#"><i class="star icon"></i></a>
                 </span>
                 <span class="right floated">
-                    <a href="http://twitter.com/share">Share with Twitter</a>
+                    <a class="twitter-share-button"
+  :href="sharelink">
+Tweet</a>
                 </span>
             </div>
         </div>
@@ -31,6 +33,11 @@ import moment from "moment"
 export default {
     name: 'Card',
     props:['list', 'audioLink'],
+    data() {
+        return {
+            sharelink: `https://twitter.com/intent/tweet?text=My new Audio;url=${this.audioLink.link}`
+        }
+    },
     methods:{
         // addFav(id){
         //     axios({

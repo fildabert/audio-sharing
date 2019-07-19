@@ -2,12 +2,16 @@
 <div>
   <navbar @triggerHomePage="toggleHomePage" @triggerSignOut="toggleHomePage"></navbar>
   <Home v-if="showHome"  @triggerHomePage="toggleHomePage" ></Home>
+
+  
 </div>
 </template>
 
 <script>
 import navbar from "./navbar"
 import Home from "./Home"
+// import navbar from './navbar'
+
 export default {
 
   components : {    
@@ -26,6 +30,9 @@ export default {
     };
   },
   methods: {
+    test: function() {
+      console.log("MASUK")
+    },
     toggleHomePage : function () {
         console.log("MASUK")
       const token = localStorage.getItem("token")
