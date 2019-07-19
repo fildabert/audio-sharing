@@ -7,6 +7,8 @@
             <div class="eight wide column"  style="padding-left: 10px;">
                 <i class="fas fa-microphone" @click="record" style="font-size: 20px;"></i>
                 <i class="far fa-stop-circle" id="stoprecord" style="font-size: 20px;"></i>
+                
+                <div class="ui active inline loader"></div>
                 <Card v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
 
                 
@@ -71,9 +73,16 @@ export default {
                 const formData = new FormData()
                 formData.append('audio', audioBlob)
                 console.log(formData)
-                axios.post(`http://localhost:3000/audio/upload`, formData)
+                axios.request({
+                    method: "POST",
+                    url: "http://localhost:3000/audio/upload",
+                    data: formData,
+                    headers: {
+                        token: localStorage.getItem("token")
+                    }
+                })
                 .then(response =>{
-                    this.audios.push(response.data)
+                    this.audios.unshift(response.data)
                     console.log(response.data)
                 })
                 .catch(err =>{
