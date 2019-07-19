@@ -53,6 +53,7 @@ export default {
           username: this.username,
           password: this.password
         })
+<<<<<<< HEAD
         .then(function({ data }) {
           Swal.fire({
             type: "success",
@@ -62,6 +63,11 @@ export default {
           });
           localStorage.setItem("token", data.token);
           this.$$emit("triggerHomePage");
+=======
+        .then(data => {
+          localStorage.setItem('token',data.token) //ntar tes dulu passing datanya 
+          this.$emit('loggedIn')
+>>>>>>> a8cee1dea9444e05d2eb370fb627037fe9f6109b
         })
         .catch(err => {
           Swal.fire({
