@@ -67,7 +67,6 @@ export default {
                 const audioBlob = new Blob(audioChunks);
                 const audioURL = URL.createObjectURL(audioBlob)
                 const audio = new Audio(audioURL);
-                audio.play();
                 
                 const formData = new FormData()
                 formData.append('audio', audioBlob)
