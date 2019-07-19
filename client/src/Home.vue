@@ -33,12 +33,17 @@
 
 <script>
 import Card from './Card.vue'
+import sidebar from './sidebar'
+import myAudio from './MyAudio'
 
 export default {
     name:'Home',
     components:{
-        'Card': Card
+        'Card': Card,
+        'sidebar': sidebar,
+        'myAudio': myAudio
     },
+    props:['showHome'],
     data(){
         return{
             lists:[],
@@ -48,17 +53,7 @@ export default {
         }
     },
     mounted: function(){
-        axios({
-            url:'http://localhost:3000/audio/all',
-            method: 'GET'
-        })
-        .then(({data})=> {
-            console.log(data)
-            this.audios = data
-        })
-        .catch((err)=> {
-            console.log(err)
-        })
+        this.getAllAudio()
     },
     methods: {
         record: function() {
@@ -107,7 +102,23 @@ export default {
                 })
                 });
             });
-        }
+        },
+        getAllAudio(){
+            axios({
+            url:'http://localhost:3000/audio/all',
+            method: 'GET'
+            })
+            .then(({data})=> {
+                console.log(data)
+                this.audios = data
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
+        },
+        getUserAudio(){
+            this.item = 'myAudio'
+        },
     }
 }
 </script>

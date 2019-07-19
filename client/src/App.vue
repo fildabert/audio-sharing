@@ -8,6 +8,8 @@
 <script>
 import navbar from "./navbar"
 import Home from "./Home"
+// import navbar from './navbar'
+
 export default {
 
   components : {    
