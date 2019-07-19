@@ -13,5 +13,6 @@ router.post('/upload', authenticate,
     audioController.upload
 
 )
+router.get('/byId', authenticate, audioController.findById)
 
 module.exports = router

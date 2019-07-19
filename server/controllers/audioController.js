@@ -11,7 +11,7 @@
 
 const Audio = require("../models/audio")
 class AudioController {
-  
+
     static upload(req, res, next) {
         let imageLink = req.file.cloudStoragePublicUrl
         var newAudio = new Audio({
@@ -19,15 +19,24 @@ class AudioController {
             userId: req.headers.decoded._id
         })
         newAudio.save()
-        .then(audio =>{
-            res.status(200).json(audio)
-        })
-        .catch(next)
+            .then(audio => {
+                res.status(200).json(audio)
+            })
+            .catch(next)
     }
 
     static findAll(req, res, next) {
-        Audio.find().populate("userId").sort([['createdAt','descending']])
-        .then(audios =>{
+        Audio.find().populate("userId").sort([['createdAt', 'descending']])
+            .then(audios => {
+                res.status(200).json(audios)
+            })
+            .catch(next)
+    }
+
+    static findById(req, res, next) {
+        console.log(req.headers.decoded);
+        Audio.find({userId : req.headers.decoded._id}).sort([['createdAt', 'descending']])
+        .then(audios => {
             res.status(200).json(audios)
         })
         .catch(next)
