@@ -9,14 +9,14 @@
       </a>
       <a href="#" class="item">Home</a>
 
-      <div class="ui simple dropdown item">
+      <!-- <div class="ui simple dropdown item">
         Browse Audio<i class="dropdown icon"></i>
         <div class="menu">
           <a @click= "getUserAudio" class="item" href="#">Your Audio</a>
           <div class="divider"></div>
           <a @click= "getAllAudio" class="item" href="#">Browse the Site</a>          
         </div>
-      </div>
+      </div> -->
     </div>
     <div>
         <div class = "item">

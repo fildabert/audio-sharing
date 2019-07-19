@@ -1,6 +1,7 @@
 <template lang="html">
 <div>
-  <Home v-if="showHome"></Home>
+  <!-- <navbar></navbar> -->
+  <Home :showHome="showHome"></Home>
   <signin @triggerSignUp="triggerSignUp" @triggerHomePage="toggleHomePage" v-show="showSignIn"></signin>
   <register @triggerSignIn="toggleSignIn" @triggerHome="toggleHomePage" v-show="showSignUp"></register>
 </div>
@@ -10,11 +11,14 @@
 import signin from "./signin";
 import register from "./register"
 import Home from "./Home"
+// import navbar from './navbar'
+
 export default {
   components : {
     signin,
     register,
-    Home
+    Home,
+    // navbar
   },
   created() {
     this.toggleHomePage()

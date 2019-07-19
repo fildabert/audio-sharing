@@ -15,5 +15,6 @@ router.post('/upload',
     audioController.upload
 
 )
+router.get('/mine', audioController.findMine)
 
 module.exports = router
