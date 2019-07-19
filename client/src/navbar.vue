@@ -18,7 +18,7 @@
       </div>
       <!-- <sidebar @search="search" style="margin-top:50px" v-show="loggedIn"></sidebar> -->
     </div>
-    <register v-show="signupForm" @triggerSignIn="signin" style="margin-top:50px"></register>
+    <register v-show="signupForm" @triggerSignIn="signin" @triggerRegister="triggerHomePage" style="margin-top:50px"></register>
     <signin
       v-show="signinForm"
       @loggedIn="loggingIn"
@@ -56,6 +56,7 @@ export default {
      toggleHomePage : function () {
       const token = localStorage.getItem("token")
       if(token){
+        console.log(token, "ASDASD")
         this.signinForm = false
         this.signupForm = false
         this.loggedIn = true

@@ -80,7 +80,7 @@ export default {
             timer: 1500
           });
           localStorage.setItem("token", data)
-          this.$emit('triggerHome')
+          this.$emit('triggerRegister')
         })
         .catch(err => {
           Swal.fire({
