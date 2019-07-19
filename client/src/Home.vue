@@ -82,7 +82,7 @@ export default {
                 mediaRecorder.addEventListener("stop", () => {
                 this.recording = false
                 this.loading = true
-                
+                stream.getTracks()[0].stop()
                 const audioBlob = new Blob(audioChunks);
                 const audioURL = URL.createObjectURL(audioBlob)
                 const audio = new Audio(audioURL);
