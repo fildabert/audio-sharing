@@ -2,8 +2,8 @@
     <div style="padding-top: 20px;">
         <div class="ui card" style="width: 100%">
             <div class="content">
-                <div class="header">User</div>
                 <div>{{new Date(audioLink.createdAt).toString()}}</div>
+                <div class="header">audio.userId</div>
                 <div class="description">
                     <audio controls v-if="audioLink" style="width: 500px; background-color: blue;">
                     <source :src="audioLink.link" />
