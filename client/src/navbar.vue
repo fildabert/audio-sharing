@@ -26,7 +26,7 @@
         </div>
     </div>
   </div>
-  <sidebar style = "margin-top:38px" v-show = "loggedIn" ></sidebar>
+  <sidebar @search="search" style = "margin-top:38px" v-show = "loggedIn" ></sidebar>
   
 </div>
     <register v-show = "signupForm" style = "margin-top:38px"></register>
@@ -45,7 +45,7 @@ export default{
     name:"navbar",
     data() {
         return {
-        loggedIn : false,
+        loggedIn : true,
         signinForm: false,
         signupForm: false,
      };
@@ -77,6 +77,9 @@ export default{
         },
         getAllAudio(){
             this.$emit('getAllAudio')
+        },
+        search(value){
+            this.emit$('search', value)
         }
     }
 
