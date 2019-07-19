@@ -49,12 +49,19 @@ export default {
   methods: {
     signIn: function() {
       axios
-        .post("http://localhost:3000/users/signin",{
-          username : this.username,
-          password : this.password
+        .post("http://localhost:3000/users/signin", {
+          username: this.username,
+          password: this.password
         })
-        .then(data => {
-          localStorage.setItem('token',data.token) //ntar tes dulu passing datanya 
+        .then(function({ data }) {
+          Swal.fire({
+            type: "success",
+            title: "Login Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          localStorage.setItem("token", data.token);
+          this.$$emit("triggerHomePage");
         })
         .catch(err => {
           Swal.fire({
@@ -65,7 +72,7 @@ export default {
         });
     },
     triggerSignUp: function() {
-      this.$emit("triggerSignUp")
+      this.$emit("triggerSignUp");
     }
   }
 };

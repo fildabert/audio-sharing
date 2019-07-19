@@ -9,8 +9,13 @@ class UserController {
     userModel
       .create(newUser)
       .then((newUser) => {
-        
-        res.status(201).json(newUser)
+        let payload = {
+          _id : newUser._id,
+          username : newUser.username,
+          email : newUser.email
+        }
+        let token = sign(payload)
+        res.status(201).json(token)
       })
       .catch(next)
   }

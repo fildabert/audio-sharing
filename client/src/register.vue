@@ -25,19 +25,24 @@
           <div class="fields">
             <div class="field">
               <label>Email</label>
-              <input type="text" v-model="email" placeholder="Username" />
+              <input type="text" v-model="email" placeholder="Email" />
             </div>
           </div>
           <div class="fields">
             <div class="field">
               <label>Password</label>
-              <input type="password" v-model="password" placeholder="Username" />
+              <input type="password" v-model="password" placeholder="Password" />
             </div>
           </div>
           <div class="row">
             <input type="submit" value="Submit" class="ui blue submit button" />
           </div>
         </form>
+        <div class="row">
+          <a @click.prevent="triggerSignIn">
+            <i class="fas fa-backspace"></i>back
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -58,17 +63,24 @@ export default {
     };
   },
   methods: {
-    register: function(){
+    register: function() {
       axios
         .post("http://localhost:3000/users/signup", {
           username: this.username,
           password: this.password,
           email: this.email,
           firstName: this.firstName,
-          lastName:this.lastName
+          lastName: this.lastName
         })
-        .then(data => {
-
+        .then(({data}) => {
+          Swal.fire({
+            type: "success",
+            title: "Register Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          localStorage.setItem("token", data)
+          this.$emit('triggerHome')
         })
         .catch(err => {
           Swal.fire({
@@ -77,6 +89,10 @@ export default {
             text: err.response.data.err
           });
         });
+    },
+    triggerSignIn() {
+      console.log("masuk");
+      this.$emit("triggerSignIn");
     }
   }
 };
