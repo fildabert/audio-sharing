@@ -34,7 +34,6 @@ export default{
             this.$emit('getAllAudio')
         },
         getUserAudio(){
-          console.log('masuk ')
             this.$emit('getUserAudio')
         },
         // search(value){

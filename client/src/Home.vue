@@ -2,7 +2,7 @@
     <div style="padding-top: 30px;">
         <div class="ui grid">
             <div class="three wide column">
-                <!-- nav -->
+                <sidebar @getAllAudio="getAllAudio" @getUserAudio="getUserAudio"></sidebar>
             </div>
             <div class="eight wide column"  style="padding-left: 10px;">
 
@@ -20,8 +20,8 @@
 
                 </div>
                 
-                <Card v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
-
+                <Card v-show="page==='home'" v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
+                <myAudio v-show="page==='myAudio'" :item="item"></myAudio>    
                 
             </div>
             <div class="five wide column">
@@ -49,7 +49,9 @@ export default {
             lists:[],
             audios: [],
             recording: false,
-            loading: false
+            loading: false,
+            item: 0,
+            page: ""
         }
     },
     mounted: function(){
@@ -111,13 +113,15 @@ export default {
             .then(({data})=> {
                 console.log(data)
                 this.audios = data
+                this.page = "home"
             })
             .catch((err)=> {
                 console.log(err)
             })
         },
         getUserAudio(){
-            this.item = 'myAudio'
+            this.item ++
+            this.page = "myAudio"
         },
     }
 }
