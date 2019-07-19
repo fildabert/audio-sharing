@@ -5,10 +5,21 @@
                 <!-- nav -->
             </div>
             <div class="eight wide column"  style="padding-left: 10px;">
-                <i class="fas fa-microphone" @click="record" style="font-size: 20px;"></i>
-                <i class="far fa-stop-circle" id="stoprecord" style="font-size: 20px;"></i>
+
+                <div class="ui grid">
+                    <div class="seven wide column">
+                        
+                    </div>
+
+                    <div class="five wide column">
+                <i class="fas fa-microphone" @click="record" style="font-size: 40px;" v-show="!recording && loading === false"></i>
+                <i class="far fa-stop-circle" id="stoprecord" style="font-size: 40px;" v-show="recording && loading === false"></i>
+                <div class="ui active inline loader" v-show="loading"></div>
+                        
+                    </div>
+
+                </div>
                 
-                <div class="ui active inline loader"></div>
                 <Card v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
 
                 
@@ -31,7 +42,9 @@ export default {
     data(){
         return{
             lists:[],
-            audios: []
+            audios: [],
+            recording: false,
+            loading: false
         }
     },
     mounted: function(){
@@ -49,6 +62,7 @@ export default {
     },
     methods: {
         record: function() {
+            this.recording = true
             navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 const mediaRecorder = new MediaRecorder(stream);
@@ -66,13 +80,15 @@ export default {
                 })
 
                 mediaRecorder.addEventListener("stop", () => {
+                this.recording = false
+                this.loading = true
+                
                 const audioBlob = new Blob(audioChunks);
                 const audioURL = URL.createObjectURL(audioBlob)
                 const audio = new Audio(audioURL);
                 
                 const formData = new FormData()
                 formData.append('audio', audioBlob)
-                console.log(formData)
                 axios.request({
                     method: "POST",
                     url: "http://localhost:3000/audio/upload",
@@ -82,8 +98,9 @@ export default {
                     }
                 })
                 .then(response =>{
+                    this.loading = false
                     this.audios.unshift(response.data)
-                    console.log(response.data)
+                    console.log(response.data.userId)
                 })
                 .catch(err =>{
                     console.log(err.response)
