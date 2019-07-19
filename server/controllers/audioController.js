@@ -15,7 +15,8 @@ class AudioController {
     static upload(req, res, next) {
         let imageLink = req.file.cloudStoragePublicUrl
         var newAudio = new Audio({
-            link: imageLink
+            link: imageLink,
+            userId: req.headers.decoded._id
         })
         newAudio.save()
         .then(audio =>{
@@ -25,7 +26,7 @@ class AudioController {
     }
 
     static findAll(req, res, next) {
-        Audio.find().sort([['createdAt','descending']])
+        Audio.find().populate("userId").sort([['createdAt','descending']])
         .then(audios =>{
             res.status(200).json(audios)
         })
