@@ -1,20 +1,19 @@
 <template>
-    <div style="padding-top: 30px;">
-        <div class="ui grid">
-            <div class="three wide column">
-                <!-- nav -->
-            </div>
-            <div class="eight wide column"  style="padding-left: 10px;">
-                <i class="fas fa-microphone" @click="record" style="font-size: 20px;"></i>
-                <i class="far fa-stop-circle" id="stoprecord" style="font-size: 20px;"></i>
-                
-                <div class="ui active inline loader"></div>
-                <Card v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
-
-                
-            </div>
-            <div class="five wide column">
-                <!-- iklan -->
+    <div v-if="showHome">
+        <div style="padding-top: 30px;">
+            <div class="ui grid">
+                <div class="three wide column">
+                    <sidebar @getAllAudio="getAllAudio" @getUserAudio="getUserAudio"></sidebar>
+                </div>
+                <div class="eight wide column"  style="padding-left: 10px;">
+                    <i class="fas fa-microphone" @click="record" style="font-size: 20px;"></i>
+                    <i class="far fa-stop-circle" id="stoprecord" style="font-size: 20px;"></i>
+                    <Card v-for="audio in audios" :key="audio._id" :audioLink="audio"></Card>
+                    <myAudio :item="item"></myAudio>
+                </div>
+                <div class="five wide column">
+                    <!-- iklan -->
+                </div>
             </div>
         </div>
     </div>
@@ -22,29 +21,25 @@
 
 <script>
 import Card from './Card.vue'
+import sidebar from './sidebar'
+import myAudio from './MyAudio'
 
 export default {
     name:'Home',
     components:{
-        'Card': Card
+        'Card': Card,
+        'sidebar': sidebar,
+        'myAudio': myAudio
     },
+    props:['showHome'],
     data(){
         return{
-            audios: []
+            audios: [],
+            item: '',
         }
     },
     mounted: function(){
-        axios({
-            url:'http://localhost:3000/audio/all',
-            method: 'GET'
-        })
-        .then(({data})=> {
-            console.log(data)
-            this.audios = data
-        })
-        .catch((err)=> {
-            console.log(err)
-        })
+        this.getAllAudio()
     },
     methods: {
         record: function() {
@@ -89,7 +84,23 @@ export default {
                 })
                 });
             });
-        }
+        },
+        getAllAudio(){
+            axios({
+            url:'http://localhost:3000/audio/all',
+            method: 'GET'
+            })
+            .then(({data})=> {
+                console.log(data)
+                this.audios = data
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
+        },
+        getUserAudio(){
+            this.item = 'myAudio'
+        },
     }
 }
 </script>

@@ -41,6 +41,15 @@ class AudioController {
         })
         .catch(next)
     }
+
+    static findMine(req, res, next){
+        Audio.find({ userId: req.authenticatedUser.username })
+            .then(audios => {
+                res.status(200).json(audios)
+            })
+            .catch(next)
+    }
+    
 }
 
 module.exports = AudioController
