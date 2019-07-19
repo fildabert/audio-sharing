@@ -15,7 +15,8 @@ class AudioController {
     static upload(req, res, next) {
         let imageLink = req.file.cloudStoragePublicUrl
         var newAudio = new Audio({
-            link: imageLink
+            link: imageLink,
+            userId: req.authenticatedUser.username
         })
         newAudio.save()
         .then(audio =>{
