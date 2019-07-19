@@ -25,7 +25,7 @@ class AudioController {
     }
 
     static findAll(req, res, next) {
-        Audio.find()
+        Audio.find().sort([['createdAt','descending']])
         .then(audios =>{
             res.status(200).json(audios)
         })
