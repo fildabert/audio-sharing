@@ -2,8 +2,8 @@
     <div style="padding-top: 20px;">
         <div class="ui card" style="width: 100%">
             <div class="content">
-                <div class="header">User</div>
-                <div>{{new Date(audioLink.createdAt).toString()}}</div>
+                <div class="header">{{audioLink.userId.username}}</div>
+                <div>{{formatDate}}</div>
                 <div class="description">
                     <audio controls v-if="audioLink" style="width: 500px; background-color: blue;">
                     <source :src="audioLink.link" />
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import moment from "moment"
+
 export default {
     name: 'Card',
     props:['list', 'audioLink'],
@@ -40,6 +42,11 @@ export default {
         //     })
         //     .then
         // }
+    },
+    computed: {
+        formatDate: function() {
+            return moment(new Date(this.audioLink.createdAt)).fromNow()
+        }
     }
 }
 </script>

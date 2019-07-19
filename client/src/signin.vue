@@ -53,7 +53,7 @@ export default {
           username: this.username,
           password: this.password
         })
-        .then(function({ data }) {
+        .then(({ data }) => {
           Swal.fire({
             type: "success",
             title: "Login Success",
@@ -61,13 +61,13 @@ export default {
             timer: 1500
           });
           localStorage.setItem("token", data.token);
-          this.$$emit("triggerHomePage");
+          this.$emit("triggerHomePage");
         })
         .catch(err => {
           Swal.fire({
             type: "error",
             title: "Oops...",
-            text: err.response.data.err
+            text: err
           });
         });
     },

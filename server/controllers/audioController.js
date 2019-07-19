@@ -19,10 +19,13 @@ class AudioController {
             userId: req.headers.decoded._id
         })
         newAudio.save()
-            .then(audio => {
-                res.status(200).json(audio)
-            })
-            .catch(next)
+        .then(audio =>{
+            return Audio.findOne({_id: audio._id}).populate("userId")
+        })
+        .then(audio =>{
+            res.status(200).json(audio)
+        })
+        .catch(next)
     }
 
     static findAll(req, res, next) {

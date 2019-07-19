@@ -1,9 +1,7 @@
 <template lang="html">
 <div>
-  <navbar></navbar>
+  <navbar @triggerHomePage="toggleHomePage" @triggerSignOut="toggleHomePage"></navbar>
   <Home v-if="showHome"  @triggerHomePage="toggleHomePage" ></Home>
-  <!-- <signin @triggerSignUp="triggerSignUp" @triggerHomePage="toggleHomePage" v-show="showSignIn"></signin>
-  <register @triggerSignIn="toggleSignIn" @triggerHome="toggleHomePage" v-show="showSignUp"></register> -->
 </div>
 </template>
 
@@ -29,14 +27,12 @@ export default {
   },
   methods: {
     toggleHomePage : function () {
+        console.log("MASUK")
       const token = localStorage.getItem("token")
       if(token){
         this.showHome = true
-        this.showSignUp = false
-        this.showSignIn = false
       } else {
         this.showHome = false
-        this.showSignIn = true
       }
     },
   }
