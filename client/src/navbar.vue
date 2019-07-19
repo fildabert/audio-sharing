@@ -7,16 +7,7 @@
         <img class="logo" src="https://logo.clearbit.com/voice123.com">
             Audio
       </a>
-      <a href="#" class="item">Home</a>
-
-      <div class="ui simple dropdown item">
-        Browse Audio<i class="dropdown icon"></i>
-        <div class="menu">
-          <a @click= "getUserAudio" class="item" href="#">Your Audio</a>
-          <div class="divider"></div>
-          <a @click= "getAllAudio" class="item" href="#">Browse the Site</a>          
-        </div>
-      </div>
+      
     </div>
     <div>
         <div class = "item">
@@ -26,11 +17,11 @@
         </div>
     </div>
   </div>
-  <sidebar @search="search" style = "margin-top:38px" v-show = "loggedIn" ></sidebar>
+  <sidebar @search="search" style = "margin-top:50px" v-show = "loggedIn" ></sidebar>
   
 </div>
-    <register v-show = "signupForm" style = "margin-top:38px"></register>
-    <signin v-show = "signinForm" @loggedIn="loggingIn" @triggerSignUp = "signup" style = "margin-top:38px"></signin>
+    <register v-show = "signupForm" @triggerSignIn= "signin" style = "margin-top:50px"></register>
+    <signin v-show = "signinForm" @loggedIn="loggingIn" @triggerSignUp = "signup" @triggerHomePage = "triggerHomePage" style = "margin-top:50px"></signin>
 </div>
 
 </template>
@@ -46,7 +37,7 @@ export default{
     data() {
         return {
         loggedIn : false,
-        signinForm: false,
+        signinForm: true,
         signupForm: false,
      };
     },
@@ -56,6 +47,9 @@ export default{
         signin,
     },
     methods:{
+        triggerHomePage(){
+            this.$emit('triggerHomePage')
+        },
         signin(){
             this.signinForm = true
             this.signupForm = false
@@ -78,9 +72,6 @@ export default{
         getAllAudio(){
             this.$emit('getAllAudio')
         },
-        search(value){
-            this.emit$('search', value)
-        }
     }
 
 }

@@ -1,20 +1,20 @@
 <template lang="html">
 <div>
-  <Home v-if="showHome"></Home>
-  <signin @triggerSignUp="triggerSignUp" @triggerHomePage="toggleHomePage" v-show="showSignIn"></signin>
-  <register @triggerSignIn="toggleSignIn" @triggerHome="toggleHomePage" v-show="showSignUp"></register>
+  <navbar></navbar>
+  <Home v-if="showHome"  @triggerHomePage="toggleHomePage" ></Home>
+  <!-- <signin @triggerSignUp="triggerSignUp" @triggerHomePage="toggleHomePage" v-show="showSignIn"></signin>
+  <register @triggerSignIn="toggleSignIn" @triggerHome="toggleHomePage" v-show="showSignUp"></register> -->
 </div>
 </template>
 
 <script>
-import signin from "./signin";
-import register from "./register"
+import navbar from "./navbar"
 import Home from "./Home"
 export default {
-  components : {
-    signin,
-    register,
-    Home
+
+  components : {    
+    Home,
+    navbar,
   },
   created() {
     this.toggleHomePage()
@@ -23,15 +23,11 @@ export default {
     return {
       message: 'Hello world',
       showSignUp: false,
-      showSignIn : true,
+      showSignIn : false,
       showHome: false
     };
   },
   methods: {
-    triggerSignUp: function() {
-      this.showSignUp = true
-      this.showSignIn = false
-    },
     toggleHomePage : function () {
       const token = localStorage.getItem("token")
       if(token){
@@ -43,10 +39,6 @@ export default {
         this.showSignIn = true
       }
     },
-    toggleSignIn : function () {
-      this.showSignIn = true
-      this.showSignUp = false
-    }
   }
 };
 </script>

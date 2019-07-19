@@ -2,9 +2,9 @@
 <div style=" position: fixed" >
 
 <div class="ui vertical menu">
-  <div class="item">
+  <!-- <div class="item">
     <div class="ui input"><input v-model="searchValue" v-on:keyup= "search(searchValue)" type="text" placeholder="Search..."></div>
-  </div>
+  </div> -->
   <div class="item">
     <a class = "item">Home</a>
     <div class="menu">
@@ -37,9 +37,9 @@ export default{
         getUserAudio(){
             this.$emit('getUserAudio')
         },
-        search(value){
-            this.$emit('search', value)
-        }
+        // search(value){
+        //     this.$emit('search', value)
+        // }
     }
 
 }
