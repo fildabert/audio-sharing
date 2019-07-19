@@ -67,14 +67,13 @@ export default {
                 const audioBlob = new Blob(audioChunks);
                 const audioURL = URL.createObjectURL(audioBlob)
                 const audio = new Audio(audioURL);
-                audio.play();
                 
                 const formData = new FormData()
                 formData.append('audio', audioBlob)
                 console.log(formData)
                 axios.post(`http://localhost:3000/audio/upload`, formData)
                 .then(response =>{
-                    this.audios.push(response.data)
+                    this.audios.unshift(response.data)
                     console.log(response.data)
                 })
                 .catch(err =>{
