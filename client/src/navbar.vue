@@ -45,7 +45,7 @@ export default{
     name:"navbar",
     data() {
         return {
-        loggedIn : true,
+        loggedIn : false,
         signinForm: false,
         signupForm: false,
      };
